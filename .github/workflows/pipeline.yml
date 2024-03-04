@@ -32,4 +32,19 @@ jobs:
       - name: Trigger Deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
         run: curl https://api.render.com/deploy/srv-${{ secrets.MY_RENDER_SERVICE_ID }}?key=${{ secrets.MY_RENDER_API_KEY }}
-      
+      - name: Discord webhook success notification
+        if: success()
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: info
+          text: A new version of Bloglist App deployed
+          description: 'https://bloglist-cicd-jjjh.onrender.com/ by Nagendra'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Discord webhook failure notification
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          text: Build failed
+          description: ${{ github.event.commits[0].url }} by ${{ github.event.commits[0].committer.name }} build broken ☹️
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

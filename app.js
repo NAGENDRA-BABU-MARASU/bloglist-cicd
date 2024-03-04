@@ -1,5 +1,4 @@
 const config = require('./utils/config')
-console.log('config:', config)
 const express = require('express')
 require('express-async-errors')
 const app = express()
