@@ -48,3 +48,14 @@ jobs:
           text: Build failed
           description: ${{ github.event.commits[0].url }} by ${{ github.event.commits[0].committer.name }} build broken ☹️
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  tag_release:
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
+        uses: anothrNick/github-tag-action@93b75ef5a57640183b7e69a77098f41184b2e8ad
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
