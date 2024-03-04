@@ -1,5 +1,5 @@
 cd frontend
-npm install 
+npm install --production=false
 cd ..
 npm run build:ui
 npm start
