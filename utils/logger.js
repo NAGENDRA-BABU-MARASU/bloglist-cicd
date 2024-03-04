@@ -1,7 +1,7 @@
 const info = (...params) => {
   console.log(...params)
-  // if (process.env.NODE_ENV !== 'test') {
-  // }
+  if (process.env.NODE_ENV !== 'test') {
+  }
 }
 
 const error = (...params) => {
