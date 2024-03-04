@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import blogReduer from './reducers/blogReduer'
 import notificationReducer from './reducers/notificationReducer'
 import userReducer from './reducers/userReducer'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { HashRouter as Router } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css'
 
 const store = configureStore({
