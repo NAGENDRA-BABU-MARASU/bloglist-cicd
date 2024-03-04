@@ -13,14 +13,14 @@ beforeEach(async () => {
     let blogObject = new Blog(blog)
     await blogObject.save()
   }
-}, 100000)
+},  100000)
 
 test('blogs are returned in json format', async () => {
   await api
     .get('/api/blogs')
     .expect(200)
     .expect('Content-Type', /application\/json/)
-}, 100000)
+},  100000)
 
 test('correct number of blogs are returned', async () => {
   const response = await api.get('/api/blogs')
